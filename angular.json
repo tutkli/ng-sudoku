@@ -97,8 +97,23 @@
           "options": {
             "buildTarget": "ng-sudoku:build"
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "7535e9ca-acde-4e12-adbc-70b71426576f",
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }
