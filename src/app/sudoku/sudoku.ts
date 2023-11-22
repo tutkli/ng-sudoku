@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { BoardDifficulty } from '../models/sugoku.model';
 import { ButtonDirective } from '../ui/button.directive';
 import { ReadonlyCellPipe } from './readonly-cell.pipe';
-import { injectSudokuService, provideSudokuService } from './sudoku.service';
+import { injectSudokuService } from './sudoku.service';
 
 @Component({
   selector: 'app-sudoku',
@@ -40,7 +40,6 @@ import { injectSudokuService, provideSudokuService } from './sudoku.service';
         @for (difficulty of difficulties; track $index) {
           <button
             appButton
-            variant="outline"
             type="button"
             (click)="sudokuService.generateBoard(difficulty)">
             {{ difficulty | titlecase }}
@@ -51,7 +50,12 @@ import { injectSudokuService, provideSudokuService } from './sudoku.service';
       <div class="flex w-full items-center justify-between">
         <div
           class="flex items-center overflow-hidden rounded-lg border border-gray-500">
-          <button appButton variant="blue" class="rounded-none" type="button">
+          <button
+            appButton
+            variant="blue"
+            class="rounded-none"
+            type="button"
+            (click)="sudokuService.validateBoard()">
             Validate
           </button>
           <div class="p-2 font-semibold">{{ sudokuService.status() }}</div>
@@ -78,7 +82,6 @@ import { injectSudokuService, provideSudokuService } from './sudoku.service';
   host: {
     class: 'flex flex-col w-screen h-screen justify-center items-center',
   },
-  providers: [provideSudokuService()],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Sudoku implements OnInit {
@@ -92,7 +95,7 @@ export class Sudoku implements OnInit {
 
   onChange(event: Event, rowIndex: number, colIndex: number) {
     this.sudokuService.updateBoard(
-      parseInt((event.target as HTMLInputElement).value, 10),
+      (event.target as HTMLInputElement).valueAsNumber,
       rowIndex,
       colIndex
     );

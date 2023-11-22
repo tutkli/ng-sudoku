@@ -6,14 +6,13 @@ const buttonVariants = cva({
   base: 'rounded-lg px-4 py-2',
   variants: {
     variant: {
-      ghost: '',
       outline: 'border border-gray-500 hover:bg-gray-100',
       blue: 'bg-blue-500 text-white hover:bg-blue-600',
       green: 'bg-green-500 text-white hover:bg-green-600',
     },
   },
   defaultVariants: {
-    variant: 'ghost',
+    variant: 'outline',
   },
 });
 type ButtonVariants = VariantProps<typeof buttonVariants>;
@@ -26,7 +25,7 @@ type ButtonVariants = VariantProps<typeof buttonVariants>;
   },
 })
 export class ButtonDirective implements OnChanges {
-  @Input() variant: ButtonVariants['variant'] = 'ghost';
+  @Input() variant: ButtonVariants['variant'] = 'outline';
   @Input() class = '';
 
   protected buttonClass = signal(
