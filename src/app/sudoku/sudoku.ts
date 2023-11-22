@@ -2,11 +2,8 @@ import { TitleCasePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { BoardDifficulty } from '../models/sugoku.model';
 import { Button } from '../ui/button';
-import { kbd } from '../utils/keyboard.util';
 import { ReadonlyCellPipe } from './readonly-cell.pipe';
 import { injectSudokuService, provideSudokuService } from './sudoku.service';
-
-const SUDOKU_PATTERN = /([1-9])/;
 
 @Component({
   selector: 'app-sudoku',
@@ -28,7 +25,6 @@ const SUDOKU_PATTERN = /([1-9])/;
               class="border-black bg-white text-center"
               min="1"
               max="9"
-              (keydown)="validateInput($event)"
               (change)="onChange($event, rowIndex, colIndex)"
               [value]="col === 0 ? '' : col"
               [readOnly]="col | readonlyCell: rowIndex : colIndex"
@@ -92,13 +88,6 @@ export class Sudoku implements OnInit {
 
   ngOnInit() {
     this.sudokuService.generateBoard('random');
-  }
-
-  validateInput(event: KeyboardEvent) {
-    if (event.key !== kbd.TAB && !RegExp(SUDOKU_PATTERN).exec(event.key)) {
-      event.preventDefault();
-      (event.target as HTMLInputElement).value = '';
-    }
   }
 
   onChange(event: Event, rowIndex: number, colIndex: number) {
