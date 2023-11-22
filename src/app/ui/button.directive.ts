@@ -25,7 +25,7 @@ type ButtonVariants = VariantProps<typeof buttonVariants>;
     '[attr.class]': 'buttonClass()',
   },
 })
-export class Button implements OnChanges {
+export class ButtonDirective implements OnChanges {
   @Input() variant: ButtonVariants['variant'] = 'ghost';
   @Input() class = '';
 

@@ -1,14 +1,14 @@
 import { TitleCasePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { BoardDifficulty } from '../models/sugoku.model';
-import { Button } from '../ui/button';
+import { ButtonDirective } from '../ui/button.directive';
 import { ReadonlyCellPipe } from './readonly-cell.pipe';
 import { injectSudokuService, provideSudokuService } from './sudoku.service';
 
 @Component({
   selector: 'app-sudoku',
   standalone: true,
-  imports: [ReadonlyCellPipe, Button, TitleCasePipe],
+  imports: [ReadonlyCellPipe, ButtonDirective, TitleCasePipe],
   template: `
     <div class="flex flex-col items-center space-y-4">
       <h1 class="text-5xl font-semibold">NG Sudoku</h1>
